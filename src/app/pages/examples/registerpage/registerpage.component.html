@@ -11,15 +11,14 @@
         placement="bottom"
         tooltip="Designed and Coded by Creative Tim"
       >
-        <span> BLK• </span> Design System Angular
+        <span> BLK• </span> Health First
       </a>
       <button
         aria-controls="navigation-index"
         aria-label="Toggle navigation"
-        class="navbar-toggler navbar-toggler"
+        class="navbar-toggler navbar-toggler navigation"
         [attr.aria-expanded]="!isCollapsed"
         (click)="isCollapsed = !isCollapsed"
-        id="navigation"
         type="button"
       >
         <span class="navbar-toggler-bar bar1"> </span>
@@ -28,21 +27,19 @@
       </button>
     </div>
     <div
-      class="navbar-collapse justify-content-end"
+      class="navbar-collapse justify-content-end navigation"
       [collapse]="isCollapsed"
-      id="navigation"
     >
       <div class="navbar-collapse-header">
         <div class="row">
-          <div class="col-6 collapse-brand"><a> BLK• </a></div>
+          <div class="col-6 collapse-brand"><a> BLK </a></div>
           <div class="col-6 collapse-close text-right">
             <button
               aria-controls="navigation-index"
               aria-label="Toggle navigation"
-              class="navbar-toggler"
+              class="navbar-toggler navigation"
               [attr.aria-expanded]="!isCollapsed"
               (click)="isCollapsed = !isCollapsed"
-              id="navigation"
               type="button"
             >
               <i class="tim-icons icon-simple-remove"> </i>
@@ -54,7 +51,6 @@
         <li class="nav-item p-0">
           <a
             class="nav-link"
-            href="https://twitter.com/CreativeTim"
             placement="bottom"
             target="_blank"
             tooltip="Follow us on Twitter"
@@ -66,7 +62,6 @@
         <li class="nav-item p-0">
           <a
             class="nav-link"
-            href="https://www.facebook.com/CreativeTim"
             placement="bottom"
             target="_blank"
             tooltip="Like us on Facebook"
