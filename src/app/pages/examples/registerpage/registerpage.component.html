@@ -73,7 +73,6 @@
         <li class="nav-item p-0">
           <a
             class="nav-link"
-            href="https://www.instagram.com/CreativeTimOfficial"
             placement="bottom"
             target="_blank"
             tooltip="Follow us on Instagram"
@@ -83,15 +82,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/home']"> Back to Kit </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="https://github.com/creativetimofficial/blk-design-system-angular/issues"
-          >
-            Have an issue?
-          </a>
+          <a class="nav-link" [routerLink]="['/home']"> Back to Home </a>
         </li>
       </ul>
     </div>
@@ -103,7 +94,7 @@
     <div class="content">
       <div class="container">
         <div class="row">
-          <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+          <div class="col-lg-5 col-md-6 offset-lg-3 offset-md-3">
             <div class="square square-7" id="square7"></div>
             <div class="square square-8" id="square8"></div>
             <div class="card card-register">
@@ -117,74 +108,111 @@
                 <h4 class="card-title">Register</h4>
               </div>
               <div class="card-body">
+                <div class="mb-2">Only doctors should register here.</div>
                 <form class="form">
-                  <div
-                    class="input-group"
-                    [ngClass]="{ 'input-group-focus': focus === true }"
-                  >
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-single-02"> </i>
+                  <div class="form-group">
+                    <div class="input-group" [ngClass]="{ 'input-group-focus': focus === true }">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="tim-icons icon-single-02"> </i>
+                        </div>
                       </div>
+                      <input
+                        class="form-control"
+                        placeholder="Full Name"
+                        type="text"
+                        [(ngModel)]="doctor.doctorName"
+                        name="doctorName"
+                        #doctorName="ngModel"
+                        (focus)="focus = true"
+                        (blur)="focus = false"
+                        required
+                      />
                     </div>
-                    <input
-                      class="form-control"
-                      placeholder="Full Name"
-                      type="text"
-                      (focus)="focus = true"
-                      (blur)="focus = false"
-                    />
+                    <div class="validationError" *ngIf="(doctorName.dirty || doctorName.touched) &&
+                      doctorName.invalid && doctorName.errors.required">
+                      <small class="form-text" style="color: #C61112">Name Empty.</small>
+                    </div>
                   </div>
-                  <div
-                    class="input-group"
-                    [ngClass]="{ 'input-group-focus': focus1 === true }"
-                  >
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-email-85"> </i>
+                  <div class="form-group">
+                    <div
+                      class="input-group"
+                      [ngClass]="{ 'input-group-focus': focus1 === true }">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="tim-icons icon-email-85"> </i>
+                        </div>
                       </div>
+                      <input
+                        class="form-control"
+                        placeholder="Email"
+                        type="text"
+                        [(ngModel)]="doctor.email"
+                        name="email"
+                        #email="ngModel"
+                        (focus)="focus1 = true"
+                        (blur)="focus1 = false"
+                        required/>
                     </div>
-                    <input
-                      class="form-control"
-                      placeholder="Email"
-                      type="text"
-                      (focus)="focus1 = true"
-                      (blur)="focus1 = false"
-                    />
+                    <div class="validationError" *ngIf="(email.dirty || email.touched) &&
+                      email.invalid && email.errors.required">
+                      <small class="form-text" style="color: #C61112">Email can't be empty.</small>
+                    </div>
                   </div>
-                  <div
-                    class="input-group"
-                    [ngClass]="{ 'input-group-focus': focus2 === true }"
-                  >
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-lock-circle"> </i>
+                  <div class="form-group">
+                    <div class="input-group"
+                         [ngClass]="{ 'input-group-focus': focus2 === true }">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="tim-icons icon-lock-circle"> </i>
+                        </div>
                       </div>
+                      <input
+                        class="form-control"
+                        placeholder="Password"
+                        type="password"
+                        [(ngModel)]="doctor.password"
+                        name="password"
+                        #password="ngModel"
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                        required
+                      />
                     </div>
-                    <input
-                      class="form-control"
-                      placeholder="Password"
-                      type="text"
-                      (focus)="focus2 = true"
-                      (blur)="focus2 = false"
-                    />
+                    <div class="validationError" *ngIf="(password.dirty || password.touched) &&
+                      password.invalid && password.errors.required">
+                      <small class="form-text validationError" style="color: #C61112">Password can't be empty.</small>
+                    </div>
                   </div>
-                  <div class="form-check text-left">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" />
-
-                      <span class="form-check-sign"> </span> I agree to the
-                      <a href="javascript:void(0)"> terms and conditions </a> .
-                    </label>
+                  <div class="form-group">
+                    <div class="input-group" [ngClass]="{ 'input-group-focus': focus2 === true }">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="tim-icons icon-tablet-2"> </i>
+                        </div>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Phone number"
+                        type="text"
+                        [(ngModel)]="doctor.phoneNumber"
+                        name="phoneNumber"
+                        #phoneNumber="ngModel"
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                        required
+                      />
+                    </div>
+                    <div class="validationError" *ngIf="(phoneNumber.dirty || phoneNumber.touched) &&
+                      phoneNumber.invalid && phoneNumber.errors.required">
+                      <small class="form-text" style="color: #C61112">Phone number can't be empty.</small>
+                    </div>
                   </div>
                 </form>
               </div>
               <div class="card-footer">
-                <a
-                  class="btn btn-danger btn-round btn-lg"
-                  href="javascript:void(0)"
-                >
-                  Get Started
+                <a class="btn btn-danger btn-round btn-lg" (click)="createDoctor()">
+                  Register
                 </a>
               </div>
             </div>
