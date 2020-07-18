@@ -93,12 +93,7 @@
             <i class="fa fa-cogs d-lg-none d-xl-none"> </i> Staffs
           </a>
           <div class="dropdown-menu dropdown-with-icons" *dropdownMenu>
-            <!--<a
-              class="dropdown-item"
-              href="https://demos.creative-tim.com/blk-design-system-angular/#/documentation/overview"
-            >
-              <i class="tim-icons icon-paper"> </i> Documentation
-            </a>-->
+
             <a class="dropdown-item" [routerLink]="['/register']">
               <i class="tim-icons icon-bullet-list-67"> </i> Register
             </a>
@@ -149,17 +144,10 @@
               <span class="text-white"> </span>
             </h3>
             <p class="text-white mb-3">
-              The Design System comes with four pre-built pages to help you get
-              started faster. You can change the text and images and you're good
-              to go. More importantly, looking at them will give you a picture
-              of what you can built with this powerful Bootstrap 4 Design
-              System.
+              BLK Health Clinic is a high performance, patient-first client that is here
+              to meet your health needs and improve your life expectancy. By extension, we are here
+              not just to campaign, but ensure we have healthy Nigerians.
             </p>
-            <div class="btn-wrapper">
-              <a class="btn btn-danger text-white" data-target="#myModal2" (click)="myModal2.show()">
-                Login
-              </a>
-            </div>
           </div>
           <div class="col-md-6">
             <div class="card card-plain">
@@ -293,16 +281,16 @@
         <div class="col-md-3">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/home']"> Home </a>
+              <a class="nav-link">Home </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/landing']"> Landing </a>
+              <a class="nav-link">Dashboard </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/register']"> Register </a>
+              <a class="nav-link">Register </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/profile']"> Profile </a>
+              <a class="nav-link">Profile </a>
             </li>
           </ul>
         </div>
@@ -333,25 +321,13 @@
         <div class="col-md-3">
           <h3 class="title">Follow us:</h3>
           <div class="btn-wrapper profile">
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
-              href="https://twitter.com/creativetim"
-              target="_blank"
-            >
+            <a class="btn btn-icon btn-neutral btn-round btn-simple mr-1">
               <i class="fab fa-twitter"> </i>
             </a>
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
-              href="https://www.facebook.com/creativetim"
-              target="_blank"
-            >
+            <a class="btn btn-icon btn-neutral btn-round btn-simple mr-1">
               <i class="fab fa-facebook-square"> </i>
             </a>
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple"
-              href="https://dribbble.com/creativetim"
-              target="_blank"
-            >
+            <a class="btn btn-icon btn-neutral btn-round btn-simple">
               <i class="fab fa-dribbble"> </i>
             </a>
           </div>
@@ -414,7 +390,7 @@
               />
             </div>
           </div>
-          <alert [type]="'primary'" *ngIf="showError">
+          <alert [type]="'danger'" *ngIf="showError">
             {{loginError}}
           </alert>
           <div class="form-check mt-3">

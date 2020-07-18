@@ -37,6 +37,10 @@ export class IndexComponent implements OnInit, OnDestroy {
     const body = document.getElementsByTagName('body')[0];
     body.classList.add('index-page');
     this.appointment.reason = 'diagnosis';
+
+    if (this.authService.loggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   ngOnDestroy() {

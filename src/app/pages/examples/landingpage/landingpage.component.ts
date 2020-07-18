@@ -93,6 +93,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
             pointBorderWidth: 20,
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
+            responsive: true,
             pointRadius: 4,
             data: [
               report.diagnosis,

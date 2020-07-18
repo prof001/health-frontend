@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import {HttpService} from '../../../shared/http.service';
 import {DoctorModel} from '../../../models/doctor.model';
+import {AuthService} from '../../../shared/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registerpage',
@@ -14,11 +16,17 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   doctor: DoctorModel = new DoctorModel();
   successChecker = false;
   processing = false;
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    private authService: AuthService,
+    private router: Router) {}
 
   ngOnInit() {
     const body = document.getElementsByTagName('body')[0];
     body.classList.add('register-page');
+    if (this.authService.loggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   createDoctor() {
