@@ -12,6 +12,8 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   focus1;
   focus2;
   doctor: DoctorModel = new DoctorModel();
+  successChecker = false;
+  processing = false;
   constructor(private httpService: HttpService) {}
 
   ngOnInit() {
@@ -19,27 +21,25 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     body.classList.add('register-page');
   }
 
-  getDoctors() {
-    this.httpService.getDoctors('health/doctors').subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
-
   createDoctor() {
+    this.processing = true;
     this.httpService.createDoctor('health/registerDoctor', this.doctor).subscribe(
       res => {
-        console.log();
+        this.successChecker = true;
+        window.scrollTo(0, 0);
+        this.processing = false;
+        this.doctor = new DoctorModel();
       },
       err => {
         console.log(err);
       }
     )
   }
+
+  onAlertDismiss() {
+    this.successChecker = false;
+  }
+
   ngOnDestroy() {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('register-page');

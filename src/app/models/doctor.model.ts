@@ -3,5 +3,6 @@ export class DoctorModel {
   doctorName: string;
   email: string;
   phoneNumber: string;
+  reqPassword: string;
   password: string
 }

@@ -95,6 +95,10 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-5 col-md-6 offset-lg-3 offset-md-3">
+            <alert type="danger" [dismissible]="true" *ngIf="successChecker === true"
+              (onClose)="onAlertDismiss()">
+              Doctor created! You can now login.
+            </alert>
             <div class="square square-7" id="square7"></div>
             <div class="square square-8" id="square8"></div>
             <div class="card card-register">
@@ -109,7 +113,7 @@
               </div>
               <div class="card-body">
                 <div class="mb-2">Only doctors should register here.</div>
-                <form class="form">
+                <form class="form" #registerForm="ngForm">
                   <div class="form-group">
                     <div class="input-group" [ngClass]="{ 'input-group-focus': focus === true }">
                       <div class="input-group-prepend">
@@ -129,7 +133,7 @@
                         required
                       />
                     </div>
-                    <div class="validationError" *ngIf="(doctorName.dirty || doctorName.touched) &&
+                    <div *ngIf="(doctorName.dirty || doctorName.touched) &&
                       doctorName.invalid && doctorName.errors.required">
                       <small class="form-text" style="color: #C61112">Name Empty.</small>
                     </div>
@@ -211,9 +215,11 @@
                 </form>
               </div>
               <div class="card-footer">
-                <a class="btn btn-danger btn-round btn-lg" (click)="createDoctor()">
-                  Register
-                </a>
+                <button class="btn btn-danger btn-round btn-lg" (click)="createDoctor()"
+                        [disabled]="processing || registerForm.invalid">
+                  <span *ngIf="processing === false">Register</span>
+                  <span *ngIf="processing === true">Processing...</span>
+                </button>
               </div>
             </div>
           </div>

@@ -167,71 +167,115 @@
                 <h1 class="profile-title text-left">Book an Appointment</h1>
               </div>
               <div class="card-body">
-                <form>
+                <form #appointmentForm="ngForm">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label> Your Name </label>
-                        <input class="form-control" type="text" placeholder="Mike Smith" />
+                        <label for="fullName"> Your Name </label>
+                        <input class="form-control" type="text" placeholder="Mike Smith" name="fullName"
+                               [(ngModel)]="appointment.fullName" id="fullName" #fullName="ngModel" required/>
+                        <div *ngIf="(fullName.dirty || fullName.touched) &&
+                            fullName.invalid && fullName.errors.required">
+                          <small class="form-text" style="color: #C61112">Name field is empty.</small>
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label> Email address </label>
+                        <label for="email">Email address </label>
                         <input
                           class="form-control"
                           placeholder="mike@email.com"
                           type="email"
+                          [(ngModel)]="appointment.email"
+                          name="email"
+                          id="email"
+                          #email="ngModel"
+                          required
                         />
+                        <div *ngIf="(email.dirty || email.touched) &&
+                            email.invalid && email.errors.required">
+                          <small class="form-text" style="color: #C61112">Email field is empty.</small>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label> Phone </label>
+                        <label for="phoneNumber"> Phone </label>
                         <input
                           class="form-control"
                           type="text"
                           placeholder="09011122233"
+                          [(ngModel)]="appointment.phoneNumber"
+                          name="phoneNumber"
+                          id="phoneNumber"
+                          #phoneNumber="ngModel"
+                          required
                         />
+                        <div *ngIf="(phoneNumber.dirty || phoneNumber.touched) &&
+                            phoneNumber.invalid && phoneNumber.errors.required">
+                          <small class="form-text" style="color: #C61112">Phone number field is empty.</small>
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label> Date </label>
+                        <label for="date"> Date </label>
                         <input
                           placeholder="Datepicker"
                           class="form-control"
                           bsDatepicker
-                          [bsConfig]="{ isAnimated: true, containerClass: 'theme-red' }">
+                          [(ngModel)]="appointment.date"
+                          name="date"
+                          id="date"
+                          #date="ngModel"
+                          required
+                          [bsConfig]="datePickerConfig">
+                      </div>
+                      <div *ngIf="(date.dirty || date.touched) &&
+                            date.invalid && date.errors.required">
+                        <small class="form-text" style="color: #C61112">Date field is empty.</small>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="appointmentReason">Appointment Reason</label>
-                    <select class="form-control" id="appointmentReason">
+                    <select class="form-control" id="appointmentReason" [(ngModel)]="appointment.reason"
+                      name="reason" #reason="ngModel" required>
                       <option value="diagnosis">Diagnosis</option>
                       <option value="medication">Medication</option>
                       <option value="drug prescription">Drug Prescription</option>
                       <option value="pre-natal">Pre-Natal</option>
                       <option value="inquiry">Inquiry</option>
+                      <option value="scanning">Scanning</option>
                     </select>
+                    <div *ngIf="(reason.dirty || reason.touched) &&
+                            reason.invalid && reason.errors.required">
+                      <small class="form-text" style="color: #C61112">Reason field is empty.</small>
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label> Message </label>
-                        <textarea class="form-control" placeholder="State your reason for visit" cols="5"
-                        ></textarea>
+                        <label for="note"> Note </label>
+                        <textarea class="form-control" placeholder="Expatiate on the reason for your appointment" cols="5"
+                        [(ngModel)]="appointment.note" name="note" id="note"></textarea>
                       </div>
                     </div>
                   </div>
+                  <alert type="default" [dismissible]="true" *ngIf="successChecker" (onClose)="onAlertDismiss()">
+                    {{appointmentMessage}}
+                  </alert>
                   <button
                     class="btn btn-danger btn-round float-right"
                     placement="right"
-                    type="submit">
-                    Book Appointment
+                    type="submit"
+                    (click)="bookAppointment()"
+                    [disabled]="processing || appointmentForm.invalid">
+                    <span *ngIf="processing === false">Book Appointment</span>
+                    <span *ngIf="processing === true">Processing...</span>
                   </button>
                 </form>
               </div>
@@ -264,22 +308,22 @@
         <div class="col-md-3">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="https://creative-tim.com/contact-us?ref=blkdsa-footer">
+              <a class="nav-link" >
                 Contact Us
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://creative-tim.com/about-us?ref=blkdsa-footer">
+              <a class="nav-link">
                 About Us
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://creative-tim.com/blog?ref=blkdsa-footer">
+              <a class="nav-link">
                 Blog
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://opensource.org/licenses/MIT">
+              <a class="nav-link">
                 License
               </a>
             </li>
@@ -348,6 +392,8 @@
                 class="form-control"
                 placeholder="Email"
                 type="email"
+                [(ngModel)]="doctor.email"
+                name="email"
               />
             </div>
           </div>
@@ -362,22 +408,24 @@
                 class="form-control"
                 placeholder="Password"
                 type="password"
+                [(ngModel)]="doctor.reqPassword"
+                name="reqPassword"
               />
             </div>
           </div>
+          <alert [type]="'primary'" *ngIf="showError">
+            {{loginError}}
+          </alert>
           <div class="form-check mt-3">
             <label class="form-check-label">
-              <input
-                checked="checked"
-                class="form-check-input"
-                type="checkbox"
-              />
               You don't have an account yet? <a routerLink="/register">Sign up here!</a>
             </label>
           </div>
           <div class="text-center">
-            <button class="btn btn-primary my-4" type="button">
-              Sign in
+            <button class="btn btn-primary my-4" type="button" (click)="loginDoctor()"
+              [disabled]="processing">
+              <span *ngIf="processing === false">Sign in</span>
+              <span *ngIf="processing === true">Processing...</span>
             </button>
           </div>
         </form>

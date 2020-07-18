@@ -12,7 +12,10 @@ export class LandingpageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const body = document.getElementsByTagName('body')[0];
     body.classList.add('landing-page');
+    this.setupChart();
+  }
 
+  setupChart() {
     const canvas: any = document.getElementById('chartBig');
     const ctx = canvas.getContext('2d');
     const gradientFill = ctx.createLinearGradient(0, 350, 0, 50);
@@ -23,13 +26,13 @@ export class LandingpageComponent implements OnInit, OnDestroy {
       responsive: true,
       data: {
         labels: [
-            'Diagnosis',
-            'Medication',
-            'Drug Prescription',
-            'Pre-Natal',
-            'Monthly Checkup',
-            'Inquiry',
-            'Greeting'
+          'Diagnosis',
+          'Medication',
+          'Drug Prescription',
+          'Pre-Natal',
+          'Monthly Checkup',
+          'Inquiry',
+          'Scanning'
         ],
         datasets: [
           {
