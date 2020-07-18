@@ -1,5 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import Chart from 'chart.js';
+import {HttpService} from '../../../shared/http.service';
+import {DoctorModel} from '../../../models/doctor.model';
+import {AppointmentReportModel} from '../../../models/appointment.report.model';
+import {QuotesService} from '../../../shared/quotes.service';
+import {QuoteModel} from '../../../models/quote.model';
+import {AuthService} from '../../../shared/auth.service';
 
 @Component({
   selector: 'app-landingpage',
@@ -7,15 +13,52 @@ import Chart from 'chart.js';
 })
 export class LandingpageComponent implements OnInit, OnDestroy {
   isCollapsed = true;
-  constructor() {}
+  doctorId = localStorage.getItem('doctorId');
+  doctor: DoctorModel = new DoctorModel();
+  appointmentReport: AppointmentReportModel = new AppointmentReportModel();
+  quotes: QuoteModel[] = this.quotesService.quotes;
+  currentQuote: QuoteModel = new QuoteModel();
+  constructor(
+    private httpService: HttpService,
+    private quotesService: QuotesService,
+    private authService: AuthService) {}
 
   ngOnInit() {
     const body = document.getElementsByTagName('body')[0];
     body.classList.add('landing-page');
-    this.setupChart();
+    this.getDoctorDetail();
+    this.getAppointmentReport();
+    this.currentQuote = this.quotes[Math.floor(Math.random() * this.quotes.length)];
   }
 
-  setupChart() {
+  getDoctorDetail() {
+    this.httpService.getDoctorDetail(`health/doctors/${this.doctorId}`).subscribe(
+      res => {
+        this.doctor = res;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  getAppointmentReport() {
+    this.httpService.getAppointmentReport('health/appointmentReport').subscribe(
+      res => {
+        this.appointmentReport = res;
+        this.setupChart(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  logOut() {
+    this.authService.logOut();
+  }
+
+  setupChart(report: AppointmentReportModel) {
     const canvas: any = document.getElementById('chartBig');
     const ctx = canvas.getContext('2d');
     const gradientFill = ctx.createLinearGradient(0, 350, 0, 50);
@@ -51,7 +94,15 @@ export class LandingpageComponent implements OnInit, OnDestroy {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: [80, 160, 200, 160, 250, 280, 220]
+            data: [
+              report.diagnosis,
+              report.medication,
+              report.drugPrescription,
+              report.preNatal,
+              report.monthlyCheckup,
+              report.inquiry,
+              report.scanning
+            ]
           }
         ]
       },

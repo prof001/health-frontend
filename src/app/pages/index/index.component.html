@@ -246,9 +246,10 @@
                       name="reason" #reason="ngModel" required>
                       <option value="diagnosis">Diagnosis</option>
                       <option value="medication">Medication</option>
-                      <option value="drug prescription">Drug Prescription</option>
-                      <option value="pre-natal">Pre-Natal</option>
+                      <option value="drugPrescription">Drug Prescription</option>
+                      <option value="preNatal">Pre-Natal</option>
                       <option value="inquiry">Inquiry</option>
+                      <option value="monthlyCheckup">Monthly Checkup</option>
                       <option value="scanning">Scanning</option>
                     </select>
                     <div *ngIf="(reason.dirty || reason.touched) &&

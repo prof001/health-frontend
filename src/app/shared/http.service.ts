@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppointmentModel} from '../models/appointment.model';
+import {DoctorModel} from '../models/doctor.model';
+import {AppointmentReportModel} from '../models/appointment.report.model';
 
 
 @Injectable({
@@ -16,5 +18,13 @@ export class HttpService {
 
   bookAppointment(path: string, appointmentDetail) {
     return this.http.post<AppointmentModel>(`${this.baseUrl}/${path}`, appointmentDetail);
+  }
+
+  getDoctorDetail(path: string) {
+    return this.http.get<DoctorModel>(`${this.baseUrl}/${path}`);
+  }
+
+  getAppointmentReport(path: string) {
+    return this.http.get<AppointmentReportModel>(`${this.baseUrl}/${path}`);
   }
 }
