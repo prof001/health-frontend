@@ -9,7 +9,7 @@ import {AppointmentReportModel} from '../models/appointment.report.model';
   providedIn: 'root'
 })
 export class HttpService {
-  private baseUrl = 'http://localhost:3000/api/v1';
+  private baseUrl = 'https://health4everyone.herokuapp.com/api/v1';
   constructor(private http: HttpClient) {}
 
   createDoctor(path: string, doctorDetail) {

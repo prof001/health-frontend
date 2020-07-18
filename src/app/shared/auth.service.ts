@@ -7,7 +7,7 @@ import {LoginModel} from '../models/login.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/api/v1';
+  private baseUrl = 'https://health4everyone.herokuapp.com/api/v1';
   constructor(private http: HttpClient, private router: Router) {}
 
   loginDoctor(path: string, doctorDetail) {
@@ -16,10 +16,6 @@ export class AuthService {
 
   loggedIn() {
     return !!localStorage.getItem('x-access-token');
-  }
-
-  getAccessToken() {
-    return localStorage.getItem('x-access-token');
   }
 
   logOut() {
